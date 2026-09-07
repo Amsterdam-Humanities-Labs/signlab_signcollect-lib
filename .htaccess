@@ -1,0 +1,10 @@
+# /web/lib is a library directory, not a document tree. Nothing under it is
+# ever fetched over HTTP - it is only ever include()d by PHP that lives
+# elsewhere - so serving any of it is a mistake by definition, and 403 is the
+# correct answer to a request for one of these paths.
+#
+# Belt and braces on top of the docroot rules, which already deny
+# mysql_config*.php and db_credentials.php by name: this denies the whole
+# directory, so a file added here later is covered without anyone having to
+# remember to add its name to the vhost.
+Require all denied

@@ -1,0 +1,5 @@
+# The real env file, wherever someone leaves a working copy for local
+# testing. The credentials live on the host and nowhere else.
+.env
+.env.*
+!.env.example
