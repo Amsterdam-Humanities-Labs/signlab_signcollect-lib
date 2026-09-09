@@ -3,6 +3,44 @@
 The SignCollect estate's database credentials, and the directory it is
 installed in, each in one place.
 
+## Where it runs
+
+Everywhere the rest of the estate runs, as `<root>/lib`: the **signcollect
+core server** (production VPS) at `/web/lib`, dev2 at `/web/lib`, dev-1 at
+`/srv/signcollect/web/lib`. It is not a page and serves no URL — it is two PHP
+files other components `require_once`.
+
+`.htaccess` denies everything: nothing in here is ever served to a browser.
+
+## Status
+
+**Production**, and new — the migration onto it is still in progress, which is
+why every consumer still works without it (see *Compatibility shims*).
+
+## How to deploy it
+
+Not Composer, and no build step. Deployment is by
+`interface_deploy/scripts/repos.tsv` in `signlab_signcollect-stack`, which maps
+`lib` → this repo on branch `main`; `host-bootstrap.sh` clones it onto the host
+like every other component. It is listed **first** in that file so it is on
+disk before the repos that include it.
+
+## Dependencies
+
+None. It is the bottom of the stack — it requires no other repo and no service.
+What it needs is one file the host supplies, `<root>/.env`; see *Where the
+credentials actually are*.
+
+Twelve repositories currently carry a vendored copy of `consumer/sc_paths.php`
+and go through it: `signlab_signCollect-v2`, `signlab_zin`,
+`signlab_annotation-editors`, `signlab_hh`, `signlab_sCAPI`,
+`signlab_studio_beta`, `signlab_viconDashboard`, `signlab_sC-Animation-PP`,
+`signlab_blendAnims`, `signlab_mocap`, `signlab_mocapStudio` and
+`signlab_mocap_lab`. Everything else reaches the credentials through the
+`compat/` shims.
+
+## Why it exists
+
 Before this, roughly 170 PHP files reached the database through some spelling
 of `mysql_config.php` (21 of them, at four different relative depths, plus 24
 hardcoded `/web/mysql_config.php` paths), and four mutually incompatible
@@ -150,7 +188,8 @@ The fallback is the smaller half of the API on purpose: no env file, no
 move the root installs the library; a host that has not moved it needs none
 of that machinery.
 
-The copies are byte-identical, and the demo repo's `tests/path-test.sh`
+The copies are byte-identical, and `signlab_signcollect-stack`'s
+`interface_deploy/tests/path-test.sh`
 checksums the deployed ones against each other. Edit the one in this
 repository and re-copy; never edit a copy.
 
@@ -165,16 +204,16 @@ Two more, in `compat/`, for call sites that are not worth touching:
   `DB_NAME` and `DB_PASSWORD`, which is `signlab_hh`'s two conventions
   reconciled onto one source.
 
-## Deployment
+## Why not Composer
 
-Not Composer. The deploy is `rsync -a --delete` with no build step anywhere,
-and the one repo in the estate that already has a `composer.json` ships
-without its `vendor/` because that directory is gitignored — so a Composer
-dependency would be a deploy that silently 500s until someone remembers to
-run an install. Instead this repo is a component like any other: the demo
-repo's `scripts/repos.tsv` maps it to `/web/lib`, `clone.sh` fetches it and
-`deploy.sh` ships it, in the same pass as everything else.
+There is no build step anywhere in the deploy — `host-bootstrap.sh` clones each
+component straight into its docroot directory and that is the whole of it. The
+one repo in the estate that already has a `composer.json`, `signlab_sC-Animation-PP`,
+ships without its `vendor/` because that directory is gitignored. A Composer
+dependency here would therefore be a deploy that silently 500s until someone
+remembers to run an install that no script performs. So this repo is a
+component like any other, in the same pass as everything else.
 
-Consumers include it by path. `/web/lib/db_config.php` is the deployed
+Consumers include it by path. `<root>/lib/db_config.php` is the deployed
 location; a consumer one level below the docroot can also resolve it
 relatively as `__DIR__ . '/../lib/db_config.php'`.
