@@ -1,6 +1,6 @@
 <?php
 /**
- * Compatibility shim for signlab_hh, which spells its credentials two
+ * Compatibility shim for signlab_patient-info, which spells its credentials two
  * different ways inside one repository:
  *
  *   $db_config = ['host' => 'localhost', 'password' => DB_PASSWORD, ...]

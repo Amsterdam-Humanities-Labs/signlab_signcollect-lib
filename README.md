@@ -57,4 +57,4 @@ The root is the first of: the `SC_WEB_ROOT` constant, the `SC_WEB_ROOT` env var,
 - `consumer/sc_paths.py` is the Python twin: `sc_root()`, `sc_path()`, `sc_dir()`, the same 4 names, `sc_env()`, `sc_env_file()` and `sc_setting(key, default)`. Root: `SC_WEB_ROOT` env var, then `SC_WEB_ROOT=` in `$SC_ENV_FILE` or `/web/.env`, then `/web`. Copies: mocap, pythonCron, viconSync, zin, mocapDataPackage.
 - The PHP resolver is also copied into s3b_server (root and `viewer/`), s3b_glb, s3b_viewer, client_monitor_dashboard, mocapDataPackage and mocap_lab, which the stack does not deploy.
 - `compat/mysql_config.php` sets `$servername`, `$username`, `$password` and `$database`. Point `<root>/mysql_config.php` at it.
-- `compat/db_credentials.php` defines `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME` and `DB_PASSWORD` (used by signlab_hh).
+- `compat/db_credentials.php` defines `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME` and `DB_PASSWORD` (used by signlab_patient-info).
