@@ -25,7 +25,7 @@
  *
  * Callers that cannot be changed keep working through compat/: see
  * compat/mysql_config.php (bare $servername/$username/$password/$database)
- * and compat/db_credentials.php (the DB_* constants signlab_hh uses). Those
+ * and compat/db_credentials.php (the DB_* constants signlab_patient-info uses). Those
  * are shims over this function, not second sources of truth.
  */
 
