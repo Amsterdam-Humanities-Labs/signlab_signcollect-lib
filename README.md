@@ -53,7 +53,7 @@ The root is the first of: the `SC_WEB_ROOT` constant, the `SC_WEB_ROOT` env var,
 ## Compatibility shims
 - `consumer/sc_paths.php` loads the first `paths.php` it finds in `__DIR__/lib`, `../lib`, `../../lib` or `/web/lib`. If there is none, it defines the same five path functions with the `/web` default. Edit it here and copy it out again. Never edit a copy.
   Copies: signCollect-v2, zin, hh, studio_beta, videoFix, annotation-tool, viconDashboard, sC-Animation-PP, blendAnims, mocap, mocapStudio (root and `lab/`) and the stack's `interface_deploy/web_extra/`. All match this one.
-  Exception: `signlab_sCAPI/sc_paths.php` has drifted; it lacks the `__DIR__/lib` candidate. The stack deploys it at `zin/api/`, and `path-test.sh` only checks copies one level below the root, so the test misses it.
+  Exception: `signlab_signCollect-API-TYD/sc_paths.php` has drifted; it lacks the `__DIR__/lib` candidate. The stack deploys it at `zin/api/`, and `path-test.sh` only checks copies one level below the root, so the test misses it.
 - `consumer/sc_paths.py` is the Python twin: `sc_root()`, `sc_path()`, `sc_dir()`, the same 4 names, `sc_env()`, `sc_env_file()` and `sc_setting(key, default)`. Root: `SC_WEB_ROOT` env var, then `SC_WEB_ROOT=` in `$SC_ENV_FILE` or `/web/.env`, then `/web`. Copies: mocap, pythonCron, viconSync, zin, mocapDataPackage.
 - The PHP resolver is also copied into s3b_server (root and `viewer/`), s3b_glb, s3b_viewer, client_monitor_dashboard, mocapDataPackage and mocap_lab, which the stack does not deploy.
 - `compat/mysql_config.php` sets `$servername`, `$username`, `$password` and `$database`. Point `<root>/mysql_config.php` at it.
