@@ -58,3 +58,10 @@ The root is the first of: the `SC_WEB_ROOT` constant, the `SC_WEB_ROOT` env var,
 - The PHP resolver is also copied into sam3d-body-queue (root and `viewer/`), body-animation-viewer, s3b_viewer, client_monitor_dashboard, mocapDataPackage and mocap_lab, which the stack does not deploy.
 - `compat/mysql_config.php` sets `$servername`, `$username`, `$password` and `$database`. Point `<root>/mysql_config.php` at it.
 - `compat/db_credentials.php` defines `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME` and `DB_PASSWORD` (used by signlab_patient-info).
+
+## License and citation
+
+Apache License 2.0, copyright University of Amsterdam: see [LICENSE](LICENSE) and
+[NOTICE](NOTICE). You may use it, also commercially, as long as you credit
+Gomer Otterspeer / University of Amsterdam as the source. To cite it, use
+[CITATION.cff](CITATION.cff) (the *Cite this repository* button on GitHub) or the DOI [10.21942/uva.33980383](https://doi.org/10.21942/uva.33980383).
