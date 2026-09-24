@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "signlab_signcollect-lib: Shared database configuration for the SignCollect estate: one function, one source of truth, compat shims for the legacy call sites."
+authors:
+  - given-names: Gomer
+    family-names: Otterspeer
+    affiliation: University of Amsterdam
+  - given-names: Berit
+    family-names: Janssen
+  - given-names: Stijn
+    name-particle: van
+    family-names: Hannen
+license: Apache-2.0
+repository-code: "https://github.com/Amsterdam-Humanities-Labs/signlab_signcollect-lib"
+doi: "10.21942/uva.33980383"
+keywords:
+  - "sign language"
+  - "NGT"
+  - "SignCollect"
